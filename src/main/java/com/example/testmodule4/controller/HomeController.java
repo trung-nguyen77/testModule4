@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/home")
 public class HomeController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class HomeController {
     public ModelAndView show(@RequestParam(defaultValue = "0") int page) {
         ModelAndView modelAndView = new ModelAndView("/city/home");
         modelAndView.addObject("city", iServiceCity.findAll(PageRequest.of(page, 5)));
-        modelAndView.addObject("country", iServiceNation.findAll());
+        modelAndView.addObject("nation", iServiceNation.findAll());
         return modelAndView;
     }
     @ModelAttribute("city")
@@ -67,10 +66,13 @@ public class HomeController {
     }
 
     @PostMapping("edit/{id}")
-    public ModelAndView edit(@ModelAttribute(value = "city") City city, @RequestParam int idNation) {
-        Nation country = new Nation();
-        country.setIdNation(idNation);
-        city.setNation(country);
+    public ModelAndView edit(@ModelAttribute(value = "edit") City city, @RequestParam int idNation) {
+        List<Nation> list = iServiceNation.findAll();
+        for (Nation n : list) {
+            if(n.getIdNation() == idNation) {
+                city.setNation(n);
+            }
+        }
         iServiceCity.save(city);
         return new ModelAndView("redirect:/home");
     }

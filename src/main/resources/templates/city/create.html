@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Create</title>
 </head>
 <body>
+<h1>Create City</h1>
+<form th:object="${city}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Enter Name</td>
+            <td><input th:field="*{name}"></td>
+        </tr>
 
+        <tr>
+            <td>Enter Area</td>
+            <td><input th:field="*{area}"></td>
+        </tr>
+
+        <tr>
+            <td>Enter Population</td>
+            <td><input th:field="*{population}"></td>
+        </tr>
+
+        <tr>
+            <td>Enter GDP</td>
+            <td><input th:field="*{gdp}"></td>
+        </tr>
+
+        <tr>
+            <td>Enter Description</td>
+            <td><input th:field="*{description}"></td>
+        </tr>
+
+        <tr>
+            <td>Chose Nation</td>
+            <td>
+                <select name="idNation">
+                    <option th:each="n: ${nation}" th:text="${n.nameNation}" th:value="${nation.idNation}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Create</button>
+    <button>
+        <a href="/home">Back to homepage</a>
+    </button>
+</form>
 </body>
 </html>

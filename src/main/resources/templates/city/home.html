@@ -24,7 +24,7 @@
     </div>
 </form>
 
-<table border="2" class="table table-dark">
+<table border="2" class="table table-striped">
     <tr>
         <th>Id</th>
         <th>Name</th>
@@ -37,20 +37,20 @@
     </tr>
     <tr th:each="c,loop :${city}">
         <td th:text="${loop.count}"></td>
-        <td th:text="${c.name}"></td>
+        <td> <a th:href="@{/details/id(id=${c.id})}" th:text="${c.name}" > </a> </td>
         <td th:text="${c.area}"></td>
         <td th:text="${c.population}"></td>
         <td th:text="${c.gdp}"></td>
         <td th:text="${c.description}"></td>
-        <td th:text="${c.nation.name}"></td>
+        <td th:text="${c.nation.nameNation}"></td>
         <td>
             <button class="btn btn-warning">
-                <a  style="text-decoration: none; text-decoration-color: black" th:href="@{/edit/{id}(id=${s.id})}">Edit</a>
+                <a  style="text-decoration: none; text-decoration-color: black" th:href="@{/edit/{id}(id=${c.id})}">Edit</a>
             </button>
         </td>
         <td>
             <button class="btn btn-danger">
-                <a style="text-decoration: none; text-decoration-color: black" th:href="@{/delete/{id}(id=${s.id})}">Delete</a>
+                <a style="text-decoration: none; text-decoration-color: black" th:href="@{/delete/{id}(id=${c.id})}">Delete</a>
             </button>
         </td>
     </tr>
